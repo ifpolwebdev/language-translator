@@ -1,5 +1,5 @@
 const fromText = document.querySelector(".from-text"),
-  tmText = document.querySelector(".to-text"),
+  toText = document.querySelector(".to-text"),
   exchangeIcon = document.querySelector(".exchange"),
   selectTag = document.querySelectorAll("select"),
   icons = document.querySelectorAll(".row i"),
@@ -15,5 +15,21 @@ selectTag.forEach((tag, id) => {
     }
     let option = `<option ${selected} value="${country_code}">${countries[country_code]}</option>`;
     tag.insertAdjacentHTML("beforeend", option);
+  }
+});
+
+exchangeIcon.addEventListener("click", () => {
+  let tempText = fromText.value,
+    tempLang = selectTag[0].value;
+  fromText.value = toText.value;
+  toText.value = tempText.value;
+
+  selectTag[0].value = selectTag[1].value;
+  selectTag[1].value = tempLang;
+});
+
+fromText.addEventListener("keyup", () => {
+  if (!fromText.value) {
+    toText.value = "";
   }
 });
